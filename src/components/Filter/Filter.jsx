@@ -11,7 +11,7 @@ export const Filter = () => {
   };
 
   return (
-    <div>
+    <div className={css.text}>
       <label>
         <input
           type="text"

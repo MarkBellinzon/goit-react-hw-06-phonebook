@@ -2,9 +2,10 @@
   height: 30px;
   margin-left: 20px;
   background-color: #ebe9e9;
-  width: 200px;
+  width: 300px;
   border-radius: 4px;
   color: rgb(160, 100, 11);
+  /* text-align: center; */
 }
 
 .text {

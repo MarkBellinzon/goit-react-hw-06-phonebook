@@ -9,23 +9,27 @@ export const App = () => {
   const users = useSelector(state => state.contacts.items);
 
   return (
-    <Section className={css.form}>
-      <div className={css.container}>
-        <h1 className={css.title}>Phonebook</h1>
+    <div className={css.form}>
+       <h1 className={css.title}>Phonebook</h1>
+    <Section >
+      
+       
         <ContactForm />
-      </div>
-      <div className={css.container}>
+      
+     
         <h2 className={css.title}>Contacts</h2>
         {!users.length ? (
-          <h3>Your phonebook is empty. Add your first contact</h3>
+          <h3 className={css.text}>Your phonebook is empty. Add your first contact</h3>
         ) : (
           <>
-            <h3>Your phonebook has {users.length} contacts</h3>
+            <h3 className={css.text}>Your phonebook has {users.length} contacts</h3>
             <Filter />
             <ContactList />
           </>
         )}
-      </div>
+      
     </Section>
+</div>
+
   );
 };
