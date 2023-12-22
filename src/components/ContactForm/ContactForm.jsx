@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
 import css from './ContactForm.module.css';
+import React from 'react';
+import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 
-export const ContactForm = ({ addContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const handleChangeName = e => {
-    setName(e.target.value);
-  };
-
-  const handleChangeNumber = e => {
-    setNumber(e.target.value);
-  };
+export const ContactForm = () => {
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    addContact({
-      name,
-      number,
-    });
-    setName('');
-    setNumber('');
+
+    const newObj = {
+      id: nanoid(),
+      name: e.target.elements.name.value,
+      number: e.target.elements.number.value,
+    };
+    dispatch(addContact(newObj));
+
+    e.target.reset();
   };
 
   return (
@@ -29,28 +26,30 @@ export const ContactForm = ({ addContact }) => {
         Name
         <input
           className={css.input}
+          placeholder="Name"
           type="text"
           name="name"
-          placeholder="Enter name"
-          value={name}
+          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          onChange={handleChangeName}
         />
       </label>
+
       <label className={css.ttitle}>
-        Number
+       Number
         <input
           className={css.input}
+          placeholder="Phone number"
           type="tel"
           name="number"
-          placeholder="Enter number"
-          value={number}
+          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          onChange={handleChangeNumber}
         />
       </label>
-      <button className={css.button} type="submit">
-        Add contact
+
+      <button type="submit" className={css.button}>
+        Add Contact
       </button>
     </form>
   );
