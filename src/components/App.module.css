@@ -20,9 +20,11 @@
 }
 
 .text {
-  font-size: 20px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  margin-left: 120px;
+  font-size: 15px;
+  text-align: center;
+  color:  rgb(38, 119, 92);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  /* margin-left: 10px; */
 }
 
 /* 
