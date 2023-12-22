@@ -1,26 +1,55 @@
 import css from './ContactForm.module.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
+import { getContact } from '../../redux/selectors';
+import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContact);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    number: '',
+  });
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({ ...prevData, [name]: value }));
+  };
+
+  const isContactExist = () => {
+    return contacts.some(
+      contact =>
+        contact.name.toLowerCase() === formData.name.toLowerCase() ||
+        contact.number === formData.number
+    );
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const newObj = {
+    if (isContactExist()) {
+      // обробка для вже існуючого контакту
+      // alert(`${formData.name} is already in contacts`);
+      // alert(`${formData.number} is already in contacts`);
+      return toast.warn(`${formData.name} is already in contacts`);
+    }
+
+    const newContact = {
       id: nanoid(),
-      name: e.target.elements.name.value,
-      number: e.target.elements.number.value,
+      name: formData.name,
+      number: formData.number,
     };
-    dispatch(addContact(newObj));
 
-    // setName('');
-    // setNumber('');
+    dispatch(addContact(newContact));
 
-    e.target.reset('');
+    setFormData({
+      name: '',
+      number: '',
+    });
   };
 
   return (
@@ -32,21 +61,21 @@ export const ContactForm = () => {
           placeholder="Name"
           type="text"
           name="name"
-          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          value={formData.name}
+          onChange={handleInputChange}
           required
         />
       </label>
 
       <label className={css.ttitle}>
-       Number
+        Number
         <input
           className={css.input}
           placeholder="Phone number"
           type="tel"
           name="number"
-          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          value={formData.number}
+          onChange={handleInputChange}
           required
         />
       </label>
@@ -57,3 +86,57 @@ export const ContactForm = () => {
     </form>
   );
 };
+
+// import css from './ContactForm.module.css';
+// import React from 'react';
+// import { nanoid } from 'nanoid';
+// import { useDispatch } from 'react-redux';
+// import { addContact } from '../../redux/contactsSlice';
+
+// export const ContactForm = () => {
+//   const dispatch = useDispatch();
+
+//   const handleSubmit = e => {
+//     e.preventDefault();
+
+//     const newObj = {
+//       id: nanoid(),
+//       name: e.target.elements.name.value,
+//       number: e.target.elements.number.value,
+//     };
+
+//     dispatch(addContact(newObj));
+
+//     e.target.reset('');
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className={css.card}>
+//       <label className={css.ttitle}>
+//         Name
+//         <input
+//           className={css.input}
+//           placeholder="Name"
+//           type="text"
+//           name="name"
+//           required
+//         />
+//       </label>
+
+//       <label className={css.ttitle}>
+//         Number
+//         <input
+//           className={css.input}
+//           placeholder="Phone number"
+//           type="tel"
+//           name="number"
+//           required
+//         />
+//       </label>
+
+//       <button type="submit" className={css.button}>
+//         Add Contact
+//       </button>
+//     </form>
+//   );
+// };
