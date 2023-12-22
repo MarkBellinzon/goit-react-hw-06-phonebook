@@ -4,6 +4,8 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
+import { ToastContainer } from 'react-toastify';
+
 
 export const App = () => {
   const users = useSelector(state => state.contacts.items);
@@ -33,6 +35,7 @@ export const App = () => {
           </>
         )}
       </Section>
+      <ToastContainer />
     </div>
   );
 };

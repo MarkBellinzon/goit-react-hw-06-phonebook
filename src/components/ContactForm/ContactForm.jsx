@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
 import { getContact } from '../../redux/selectors';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
