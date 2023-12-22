@@ -17,7 +17,10 @@ export const ContactForm = () => {
     };
     dispatch(addContact(newObj));
 
-    e.target.reset();
+    // setName('');
+    // setNumber('');
+
+    e.target.reset('');
   };
 
   return (

@@ -10,29 +10,29 @@ export const App = () => {
 
   return (
     <div className={css.form}>
-       <h1 className={css.title}>Phonebook</h1>
-    <Section >
-      
-       
+      <h1 className={css.title}>Phonebook</h1>
+      <Section>
         <ContactForm />
-      
-     
+      </Section>
+
+      <Section>
         <h2 className={css.title}>Contacts</h2>
         {!users.length ? (
-          <h3 className={css.text}>Your phonebook is empty. Add your first contact</h3>
+          <h3 className={css.text}>
+            Your phonebook is empty. Add your first contact
+          </h3>
         ) : (
           <>
-            <h3 className={css.text}>Your phonebook has {users.length} contacts</h3>
+            <h3 className={css.text}>
+              Your phonebook has {users.length} contacts
+            </h3>
             <Filter />
-            <div className={css.scrollbar}> 
-            <ContactList />
+            <div className={css.scrollbar}>
+              <ContactList />
             </div>
           </>
-            
         )}
-      
-    </Section>
-</div>
-
+      </Section>
+    </div>
   );
 };
