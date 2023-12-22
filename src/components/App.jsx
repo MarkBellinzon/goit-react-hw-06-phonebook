@@ -24,8 +24,11 @@ export const App = () => {
           <>
             <h3 className={css.text}>Your phonebook has {users.length} contacts</h3>
             <Filter />
+            <div className={css.scrollbar}> 
             <ContactList />
+            </div>
           </>
+            
         )}
       
     </Section>

@@ -55,10 +55,10 @@
 .scrollbar {
   /* background-color: #F5F5F5; */
   float: right;
-  height: 240px;
+  height: 230px;
   margin-bottom: 25px;
   margin-left: 22px;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-right: 5px;
   width: 550px;
   overflow-y: scroll;
